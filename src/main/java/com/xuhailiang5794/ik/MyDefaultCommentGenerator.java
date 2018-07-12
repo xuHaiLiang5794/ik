@@ -17,10 +17,6 @@ import org.mybatis.generator.internal.DefaultCommentGenerator;
  * @since 2018/7/12 17:39
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
-    /**
-     *
-     */
-    private int d;
 
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
@@ -34,6 +30,11 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
         }
     }
 
+    /**
+     * 给属性添加文档注释
+     * @param field
+     * @param remarks
+     */
     private void addJavaDocLine(Field field, String remarks) {
         field.addJavaDocLine("/**");
         field.addJavaDocLine(
