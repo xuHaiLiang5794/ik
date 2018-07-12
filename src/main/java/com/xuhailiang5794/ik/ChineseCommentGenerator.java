@@ -16,7 +16,7 @@ import org.mybatis.generator.internal.DefaultCommentGenerator;
  * @version 1.0
  * @since 2018/7/12 17:39
  */
-public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
+public class ChineseCommentGenerator extends DefaultCommentGenerator {
 
     /**
      * 给属性添加文档注释
