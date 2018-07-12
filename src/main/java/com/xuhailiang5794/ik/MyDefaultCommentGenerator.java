@@ -18,11 +18,22 @@ import org.mybatis.generator.internal.DefaultCommentGenerator;
  */
 public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
+    /**
+     * 给属性添加文档注释
+     * @param field
+     * @param introspectedTable
+     * @param introspectedColumn
+     */
     @Override
     public void addFieldComment(Field field, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
         addFieldComment(field, introspectedColumn);
     }
 
+    /**
+     * 给属性添加文档注释
+     * @param field
+     * @param introspectedColumn
+     */
     private void addFieldComment(Field field, IntrospectedColumn introspectedColumn) {
         String remarks = introspectedColumn.getRemarks();
         if (StringUtils.isNotBlank(remarks)) {
@@ -47,11 +58,9 @@ public class MyDefaultCommentGenerator extends DefaultCommentGenerator {
 
     @Override
     public void addGetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-
     }
 
     @Override
     public void addSetterComment(Method method, IntrospectedTable introspectedTable, IntrospectedColumn introspectedColumn) {
-        super.addSetterComment(method, introspectedTable, introspectedColumn);
     }
 }
