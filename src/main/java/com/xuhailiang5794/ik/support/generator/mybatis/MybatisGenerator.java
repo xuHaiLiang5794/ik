@@ -1,8 +1,7 @@
-package com.xuhailiang5794.ik;
+package com.xuhailiang5794.ik.support.generator.mybatis;
 
 import org.mybatis.generator.api.ShellRunner;
 
-import java.io.File;
 import java.net.URL;
 
 /**
