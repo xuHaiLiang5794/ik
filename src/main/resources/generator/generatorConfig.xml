@@ -23,21 +23,26 @@
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.xuhailiang5794.ik.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.xuhailiang5794.ik.support.tp.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="mapping" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapping/tp" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xuhailiang5794.ik.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xuhailiang5794.ik.support.tp.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="data_national_tree" domainObjectName="User" enableCountByExample="false"
+        <table tableName="t_tp_partner" domainObjectName="Partner" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />
+        </table>
+        <table tableName="t_tp_secret_key" domainObjectName="SecretKey" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />

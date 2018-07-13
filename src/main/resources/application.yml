@@ -24,4 +24,3 @@ spring:
           default-requeue-rejected: true
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
-  type-aliases-package: com.xuhailiang5794.ik
