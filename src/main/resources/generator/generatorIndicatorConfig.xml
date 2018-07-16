@@ -21,31 +21,51 @@
         </jdbcConnection>
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
+            <property name="useJSR310Types" value="true"/>
         </javaTypeResolver>
         <!-- 生成模型的包名和位置-->
-        <javaModelGenerator targetPackage="com.xuhailiang5794.ik.support.tp.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.xuhailiang5794.ik.business.indicator.entity" targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
         <!-- 生成映射文件的包名和位置-->
-        <sqlMapGenerator targetPackage="mapping/tp" targetProject="src/main/resources">
+        <sqlMapGenerator targetPackage="mapping/indicator" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
         <!-- 生成DAO的包名和位置-->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xuhailiang5794.ik.support.tp.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xuhailiang5794.ik.business.indicator.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!-- 要生成的表 tableName是数据库中的表名或视图名 domainObjectName是实体类名-->
-        <table tableName="t_tp_partner" domainObjectName="Partner" enableCountByExample="false"
+        <table tableName="t_ind_expression" domainObjectName="Expression" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />
         </table>
-        <table tableName="t_tp_secret_key" domainObjectName="SecretKey" enableCountByExample="false"
+        <table tableName="t_ind_expression_code" domainObjectName="ExpressionCode" enableCountByExample="false"
                enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
             <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />
+        </table>
+        <table tableName="t_ind_indicator_classification" domainObjectName="IndicatorClassification" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />
+        </table>
+        <table tableName="t_ind_indicator_library" domainObjectName="IndicatorLibrary" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />
+        </table>
+        <table tableName="t_ind_indicator_where" domainObjectName="IndicatorWhere" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="id" sqlStatement=" select replace(uuid(),'-','')" />
+        </table>
+        <table tableName="t_ind_where_code" domainObjectName="IndicatorWhereCode" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 
     </context>

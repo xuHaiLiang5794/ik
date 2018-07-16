@@ -11,4 +11,5 @@ package com.xuhailiang5794.ik.support.cons;
  */
 public interface AppConstant {
     String QUEUE_NAME = "ikQueue";
+    String JWT_HEADER = "Authorization";
 }
