@@ -19,7 +19,7 @@ import java.util.Map;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 14:14
+ * @since 2018/7/16
  */
 @Service
 @Transactional(readOnly = true)
@@ -41,7 +41,8 @@ public class IndicatorClassificationService {
 
     public Page list(int page, int limit, Map<String, Object> params) {
         PageHelper.startPage(page, limit);
-        Page<IndicatorClassification> pageData = (Page<IndicatorClassification>) mapper.selectByCon(params);
-        return pageData;
+//        Page<IndicatorClassification> pageData = (Page<IndicatorClassification>) mapper.selectByCon(params);
+//        return pageData;
+        return null;
     }
 }

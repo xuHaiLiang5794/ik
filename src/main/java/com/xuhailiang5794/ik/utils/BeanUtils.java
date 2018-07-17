@@ -1,11 +1,18 @@
 package com.xuhailiang5794.ik.utils;
 
+import org.springframework.util.Assert;
+
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.OffsetTime;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <pre>
@@ -14,15 +21,17 @@ import java.util.Date;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 14:59
+ * @since 2018/7/16
  */
 public class BeanUtils extends org.springframework.beans.BeanUtils {
 
     /**
      * 给bean设置数据时间
+     *
      * @param obj
      */
     public static void setDataTimeOfBean(Object obj) {
+        Assert.notNull(obj, "obj must not be null");
         Class clazz = obj.getClass();
         try {
             Field field = clazz.getDeclaredField("dataTime");
@@ -56,4 +65,28 @@ public class BeanUtils extends org.springframework.beans.BeanUtils {
         }
         return data;
     }
+
+    /**
+     * 把java bean的属性和值都取出来放到Map中返回
+     *
+     * @return
+     */
+    public static Map<String, Object> beanToMap(Object obj)
+            throws InvocationTargetException, IllegalAccessException {
+        Assert.notNull(obj, "obj must not be null");
+        PropertyDescriptor[] targetPds = getPropertyDescriptors(obj.getClass());
+        return getMap(obj, targetPds);
+    }
+
+    private static Map<String, Object> getMap(Object obj, PropertyDescriptor[] targetPds)
+            throws InvocationTargetException, IllegalAccessException {
+        Map<String, Object> data = new HashMap<>(targetPds.length);
+        for (PropertyDescriptor targetPd : targetPds) {
+            Method method = targetPd.getReadMethod();
+            method.setAccessible(true);
+            data.put(targetPd.getName(), method.invoke(obj));
+        }
+        return data;
+    }
+
 }

@@ -9,7 +9,7 @@ import lombok.Data;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 16:35
+ * @since 2018/7/16
  */
 @Data
 public class OptResult extends BaseResult<Object> {

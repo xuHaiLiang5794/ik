@@ -11,7 +11,7 @@ import java.net.URL;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/12 17:51
+ * @since 2018/7/12
  */
 public class MybatisGenerator {
     public static void main(String[] args) {

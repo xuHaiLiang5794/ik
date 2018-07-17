@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 13:56
+ * @since 2018/7/16
  */
 @EnableWebMvc
 @EnableSwagger2

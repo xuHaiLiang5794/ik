@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 14:07
+ * @since 2018/7/16
  */
 @Api(description = "指标类表维护")
 @RestController

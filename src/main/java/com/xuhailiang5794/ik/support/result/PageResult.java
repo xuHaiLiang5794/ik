@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 16:41
+ * @since 2018/7/16
  */
 @Data
 public class PageResult extends BaseResult<List> {

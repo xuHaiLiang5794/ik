@@ -14,7 +14,7 @@ import java.io.File;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/6/28 14:30
+ * @since 2018/6/28
  */
 @Component
 @RabbitListener(queues = AppConstant.QUEUE_NAME)

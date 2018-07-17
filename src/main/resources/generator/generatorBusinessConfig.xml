@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<generatorConfiguration basePackage="com.xuhailiang5794.ik.business" entitySubPackage="entity">
+    <module targetProject="src/main/java">
+        <javaMvcGenerator targetPackage="indicator"
+                          controllerName="controller" serviceName="service">
+        </javaMvcGenerator>
+        <javaMvc domainObjectName="Expression" enableSave="false"
+                 enableDelete="false" enableUpdate="false"
+                 enableSelectByPrimaryKey="false" enableSelectByCondition="false">
+        </javaMvc>
+        <javaMvc domainObjectName="Expression" enableSave="false"
+                 enableDelete="false" enableUpdate="false"
+                 enableSelectByPrimaryKey="false" enableSelectByCondition="false">
+        </javaMvc>
+    </module>
+</generatorConfiguration>

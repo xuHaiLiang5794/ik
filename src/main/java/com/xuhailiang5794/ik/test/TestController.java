@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/13 18:48
+ * @since 2018/7/13
  */
 @RestController
 @RequestMapping("test")

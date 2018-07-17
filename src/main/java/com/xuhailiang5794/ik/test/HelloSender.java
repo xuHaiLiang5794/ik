@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/6/28 14:27
+ * @since 2018/6/28
  */
 @Component
 public class HelloSender {

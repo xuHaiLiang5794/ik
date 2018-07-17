@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/6/28 14:17
+ * @since 2018/6/28
  */
 @Configuration
 public class RabbitConfig {

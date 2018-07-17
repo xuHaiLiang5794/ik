@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author hailiang.xu
  * @version 1.0
- * @since 2018/7/16 16:32
+ * @since 2018/7/16
  */
 @ControllerAdvice
 @Slf4j
