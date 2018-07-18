@@ -3,6 +3,7 @@ package com.xuhailiang5794.ik.business.indicator.controller;
 import com.xuhailiang5794.ik.business.indicator.entity.IndicatorClassification;
 import com.xuhailiang5794.ik.business.indicator.service.IndicatorClassificationService;
 import com.xuhailiang5794.ik.business.indicator.vo.IndicatorClassificationVO;
+import com.xuhailiang5794.ik.utils.BeanUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * <pre>
@@ -46,7 +49,7 @@ public class IndicatorClassificationController {
 
     @ApiOperation(value = "list", notes = "分页获取数据", response = Object.class)
     @GetMapping("list")
-    public Object list() {
-        return service.list(1, 10, null);
+    public Object list(int page, int limit, IndicatorClassificationVO vo) throws InvocationTargetException, IllegalAccessException {
+        return service.list(1, 10, BeanUtils.beanToMap(vo));
     }
 }

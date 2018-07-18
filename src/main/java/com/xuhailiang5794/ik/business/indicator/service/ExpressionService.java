@@ -2,50 +2,42 @@ package com.xuhailiang5794.ik.business.indicator.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.xuhailiang5794.ik.business.indicator.entity.IndicatorClassification;
-import com.xuhailiang5794.ik.business.indicator.mapper.IndicatorClassificationMapper;
-import com.xuhailiang5794.ik.business.indicator.vo.IndicatorClassificationVO;
 import com.xuhailiang5794.ik.utils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.Map;
+import com.xuhailiang5794.ik.business.indicator.entity.Expression;
+import com.xuhailiang5794.ik.business.indicator.mapper.ExpressionMapper;
+import com.xuhailiang5794.ik.business.indicator.vo.ExpressionVO;
 
-/**
- * <pre>
- *
- * </pre>
- *
- * @author hailiang.xu
- * @version 1.0
- * @since 2018/7/16
- */
 @Service
 @Transactional(readOnly = true)
-public class IndicatorClassificationService {
+public class ExpressionService {
     @Autowired
-    private IndicatorClassificationMapper mapper;
+    private ExpressionMapper mapper;
 
     @Transactional
-    public int save(IndicatorClassificationVO vo) {
-        IndicatorClassification record = new IndicatorClassification();
+    public int save(ExpressionVO vo) {
+        Expression record = new Expression();
         BeanUtils.copyProperties(vo, record);
         BeanUtils.setDataTimeOfBean(record);
         return mapper.insertSelective(record);
     }
+
     @Transactional
     public int delete(String id) {
         return mapper.deleteByPrimaryKey(id);
     }
 
-    public IndicatorClassification get(String id) {
+    public Expression get(String id) {
         return mapper.selectByPrimaryKey(id);
     }
 
     public Page list(int page, int limit, Map<String, Object> params) {
         PageHelper.startPage(page, limit);
-        Page<IndicatorClassification> pageData = (Page<IndicatorClassification>) mapper.selectByCondition(params);
+        Page<Expression> pageData = (Page<Expression>) mapper.selectByCondition(params);
         return pageData;
     }
+
 }
