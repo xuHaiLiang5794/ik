@@ -12,7 +12,8 @@ IK
 ```
 
 ## 已有功能
-* 生成支持Lombok的实体bean
+* 生成支持Lombok的实体bean(com.xuhailiang5794.ik.support.generator.mybatis.MybatisGenerator)
+* 生成简单的增删改查API(com.xuhailiang5794.ik.support.generator.business.BusinessGenerator)
 
 ## 技术选型
 ### 后端技术
