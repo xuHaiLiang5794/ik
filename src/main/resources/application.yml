@@ -24,3 +24,4 @@ spring:
           default-requeue-rejected: true
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
+maximumPoolSize: 15
