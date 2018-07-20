@@ -1,8 +1,13 @@
 package com.xuhailiang5794.ik.config;
 
+import com.xuhailiang5794.ik.support.converter.IKStringHttpMessageConverter;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.util.List;
 
 /**
  * <pre>
@@ -25,5 +30,18 @@ public class WebAppConfigurer implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/META-INF/resources/");
         registry.addResourceHandler("/webjars/**")
                 .addResourceLocations("classpath:/META-INF/resources/webjars/");
+    }
+
+    @Override
+    public void extendMessageConverters(List<HttpMessageConverter<?>> converters) {
+        for (int i = 0, size = converters.size(); i < size; i++) {
+            HttpMessageConverter<?> converter = converters.get(i);
+            if (converter instanceof StringHttpMessageConverter) {
+                /**
+                 * StringHttpMessageConverter导致ResponseBodyAdvice包装String类型时抛出异常，这里替换掉StringHttpMessageConverter
+                 */
+                converters.set(i, new IKStringHttpMessageConverter());
+            }
+        }
     }
 }

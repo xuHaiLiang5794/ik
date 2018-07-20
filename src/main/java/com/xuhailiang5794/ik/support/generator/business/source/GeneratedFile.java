@@ -7,9 +7,12 @@ import lombok.Getter;
 import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.xuhailiang5794.ik.support.generator.business.source.GeneratedFile.Constants.FILE_ENCODING;
 import static com.xuhailiang5794.ik.support.generator.business.source.GeneratedFile.Constants.FIND_PRIMARY_KEY_METHOD;
@@ -63,14 +66,52 @@ public abstract class GeneratedFile {
      *
      * @return
      */
-    public abstract String getFormattedContent();
+//    public abstract String getFormattedContent();
+    public String getFormattedContent() {
+        StringBuilder sb = new StringBuilder();
+        Class clazz;
+        try {
+            clazz = Class.forName(getDomainPackage() + OutputUtils.packageSeparator() + getDomainObjectName());
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException("要生成的domain对象不存在");
+        }
+        appendPackage(sb);
+        OutputUtils.newLine(sb);
+
+        int startIndex = sb.length();
+        String flagStr = "importStrings";
+        sb.append(flagStr);
+        int endIndex = sb.length();
+        OutputUtils.newLine(sb);
+        List<String> importStrings = getImportStrings(10);
+
+        appendContent(clazz, sb, importStrings);
+
+        StringBuilder importStringsSb = new StringBuilder();
+        importStrings = importDistinct(importStrings);
+        for (String importString : importStrings) {
+            importStringsSb.append(importString);
+            OutputUtils.newLine(importStringsSb);
+        }
+        sb.replace(startIndex, endIndex, importStringsSb.toString());
+        return sb.toString();
+    }
+    protected abstract void appendContent(Class clazz, StringBuilder sb, List<String> importStrings);
+    private void appendPackage(StringBuilder sb) {
+        sb.append("package ");
+        sb.append(getCurrentPackage());
+        sb.append(";");
+        OutputUtils.newLine(sb);
+    }
 
     /**
      * 获取生成的java文件名
      *
      * @return
      */
-    public abstract String getFileName();
+    public String getFileName() {
+        return getDomainObjectName() + getNameSuffix();
+    }
 
     /**
      * 获取当前要生成的Class所属的包名
@@ -131,10 +172,14 @@ public abstract class GeneratedFile {
     protected String getType(String typeName, List<String> importStrings) {
         int index = typeName.lastIndexOf(".");
         if (!"java.lang".equals(typeName.substring(0, index))) {
-            importStrings.add(typeName);
+            importStrings.add("import " + typeName + ";");
         }
         typeName = typeName.substring(index + 1);
         return typeName;
+    }
+
+    protected List<String> importDistinct(List<String> importStrings) {
+        return importStrings.stream().distinct().collect(Collectors.toList());
     }
 
     protected interface Constants {

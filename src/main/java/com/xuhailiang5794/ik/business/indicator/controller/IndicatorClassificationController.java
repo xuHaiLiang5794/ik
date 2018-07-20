@@ -50,6 +50,6 @@ public class IndicatorClassificationController {
     @ApiOperation(value = "list", notes = "分页获取数据", response = Object.class)
     @GetMapping("list")
     public Object list(int page, int limit, IndicatorClassificationVO vo) throws InvocationTargetException, IllegalAccessException {
-        return service.list(1, 10, BeanUtils.beanToMap(vo));
+        return service.list(page, limit, BeanUtils.beanToMap(vo));
     }
 }

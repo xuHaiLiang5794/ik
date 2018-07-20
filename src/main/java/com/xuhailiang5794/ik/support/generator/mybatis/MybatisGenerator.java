@@ -15,7 +15,7 @@ import java.net.URL;
  */
 public class MybatisGenerator {
     public static void main(String[] args) {
-        URL url = Object.class.getResource("/generator/generatorIndicatorConfig.xml");
+        URL url = Object.class.getResource("/generator/mybatis/generatorEnterpriseConfig.xml");
 
         System.out.println(url.getPath());
         ShellRunner.main(new String[]{"-configfile", url.getPath(), "-overwrite"});

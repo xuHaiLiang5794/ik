@@ -36,9 +36,8 @@ public class PageResult extends BaseResult<List> {
      */
     private int currentPageIndex;
 
-    private Page page;
-
     public PageResult(Page page) {
+        this.setSuccess(true);
         this.setTotalCount(page.getTotal());
         this.setCurrentPageIndex(page.getPageNum());
         this.setPageSize(page.getPageSize());

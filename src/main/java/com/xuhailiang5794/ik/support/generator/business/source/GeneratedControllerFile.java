@@ -26,23 +26,7 @@ public class GeneratedControllerFile extends GeneratedFile {
     }
 
     @Override
-    public String getFormattedContent() {
-        StringBuilder sb = new StringBuilder();
-        Class clazz;
-        try {
-            clazz = Class.forName(getDomainPackage() + OutputUtils.packageSeparator() + getDomainObjectName());
-        } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("要生成的domain对象不存在");
-        }
-        appendPackage(sb);
-        OutputUtils.newLine(sb);
-
-        int startIndex = sb.length();
-        String flagStr = "importStrings";
-        sb.append(flagStr);
-        int endIndex = sb.length();
-        OutputUtils.newLine(sb);
-
+    protected void appendContent(Class clazz, StringBuilder sb, List<String> importStrings) {
         sb.append("@Api(description = \"\")");
         OutputUtils.newLine(sb);
         sb.append("@RestController");
@@ -66,19 +50,10 @@ public class GeneratedControllerFile extends GeneratedFile {
         appendMethod(sb);
 
         Field[] fields = clazz.getDeclaredFields();
-        List<String> importStrings = getImportStrings(fields.length);
         initImportStrings(importStrings);
 
         OutputUtils.newLine(sb);
         sb.append("}");
-
-        StringBuilder importStringsSb = new StringBuilder();
-        for (String importString : importStrings) {
-            importStringsSb.append(importString);
-            OutputUtils.newLine(importStringsSb);
-        }
-        sb.replace(startIndex, endIndex, importStringsSb.toString());
-        return sb.toString();
     }
 
     private void appendMethod(StringBuilder sb) {
@@ -104,7 +79,7 @@ public class GeneratedControllerFile extends GeneratedFile {
         OutputUtils.newLine(sb);
         sb.append("            throws InvocationTargetException, IllegalAccessException {");
         OutputUtils.newLine(sb);
-        sb.append("        return service.list(1, 10, BeanUtils.beanToMap(vo));");
+        sb.append("        return service.list(page, limit, BeanUtils.beanToMap(vo));");
         OutputUtils.newLine(sb);
         sb.append("    }");
         OutputUtils.newLine(sb);
@@ -199,18 +174,6 @@ public class GeneratedControllerFile extends GeneratedFile {
         if (!clazz.getPackage().getName().equals("java.lang")) {
             importStrings.add("import " + clazz.getName() + ";");
         }
-    }
-
-    private void appendPackage(StringBuilder sb) {
-        sb.append("package ");
-        sb.append(getCurrentPackage());
-        sb.append(";");
-        OutputUtils.newLine(sb);
-    }
-
-    @Override
-    public String getFileName() {
-        return getDomainObjectName() + CONTROLLER_NAME_SUFFIX;
     }
 
     @Override

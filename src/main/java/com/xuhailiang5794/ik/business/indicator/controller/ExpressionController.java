@@ -43,7 +43,7 @@ public class ExpressionController {
     @GetMapping("list")
     public Object list(@RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "20") int limit, ExpressionVO vo)
             throws InvocationTargetException, IllegalAccessException {
-        return service.list(1, 10, BeanUtils.beanToMap(vo));
+        return service.list(page, limit, BeanUtils.beanToMap(vo));
     }
 
 }

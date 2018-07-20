@@ -6,6 +6,8 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
@@ -24,6 +26,29 @@ import java.util.Map;
  * @since 2018/7/16
  */
 public class BeanUtils extends org.springframework.beans.BeanUtils {
+
+    public static void setFieldValue(Object obj, Field field, Object value) throws IllegalAccessException {
+        if (value == null
+                || "".equalsIgnoreCase(value.toString())
+                || "-".equalsIgnoreCase(value.toString())
+                || "--".equalsIgnoreCase(value.toString())) {
+            return;
+        }
+        Class clazz = field.getType();
+        if (clazz == int.class
+                || clazz == Integer.class) {
+            value = Integer.valueOf(value.toString());
+        } else if (clazz == double.class
+                || clazz == Double.class) {
+            value = Double.valueOf(value.toString());
+        } else if (value.toString().equalsIgnoreCase("true")
+                || value.toString().equalsIgnoreCase("false")) {
+            value = value.toString().equalsIgnoreCase("true");
+        } else if (clazz == long.class || clazz == Long.class) {
+            value = Long.valueOf(value.toString());
+        }
+        field.set(obj, value);
+    }
 
     /**
      * 给bean设置数据时间

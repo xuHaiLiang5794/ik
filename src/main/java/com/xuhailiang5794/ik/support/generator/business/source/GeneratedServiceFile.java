@@ -1,11 +1,8 @@
 package com.xuhailiang5794.ik.support.generator.business.source;
 
 import com.xuhailiang5794.ik.utils.OutputUtils;
-import org.apache.commons.lang3.ArrayUtils;
 
 import java.io.File;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
@@ -28,23 +25,7 @@ public class GeneratedServiceFile extends GeneratedFile {
     }
 
     @Override
-    public String getFormattedContent() {
-        StringBuilder sb = new StringBuilder();
-        Class clazz;
-        try {
-            clazz = Class.forName(getDomainPackage() + OutputUtils.packageSeparator() + getDomainObjectName());
-        } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("要生成的domain对象不存在");
-        }
-        appendPackage(sb);
-        OutputUtils.newLine(sb);
-
-        int startIndex = sb.length();
-        String flagStr = "importStrings";
-        sb.append(flagStr);
-        int endIndex = sb.length();
-        OutputUtils.newLine(sb);
-
+    protected void appendContent(Class clazz, StringBuilder sb, List<String> importStrings) {
         sb.append("@Service");
         OutputUtils.newLine(sb);
         sb.append("@Transactional(readOnly = true)");
@@ -59,20 +40,10 @@ public class GeneratedServiceFile extends GeneratedFile {
         appendMapper(sb);
         appendMethod(sb);
 
-        Field[] fields = clazz.getDeclaredFields();
-        List<String> importStrings = getImportStrings(fields.length);
         initImportStrings(importStrings);
 
         OutputUtils.newLine(sb);
         sb.append("}");
-
-        StringBuilder importStringsSb = new StringBuilder();
-        for (String importString : importStrings) {
-            importStringsSb.append(importString);
-            OutputUtils.newLine(importStringsSb);
-        }
-        sb.replace(startIndex, endIndex, importStringsSb.toString());
-        return sb.toString();
     }
 
     private void appendMethod(StringBuilder sb) {
@@ -176,18 +147,6 @@ public class GeneratedServiceFile extends GeneratedFile {
         if (!clazz.getPackage().getName().equals("java.lang")) {
             importStrings.add("import " + clazz.getName() + ";");
         }
-    }
-
-    private void appendPackage(StringBuilder sb) {
-        sb.append("package ");
-        sb.append(getCurrentPackage());
-        sb.append(";");
-        OutputUtils.newLine(sb);
-    }
-
-    @Override
-    public String getFileName() {
-        return getDomainObjectName() + SERVICE_NAME_SUFFIX;
     }
 
     @Override

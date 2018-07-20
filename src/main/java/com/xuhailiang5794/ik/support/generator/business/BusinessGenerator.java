@@ -35,20 +35,22 @@ public class BusinessGenerator {
 
     public static void main(String[] args)
             throws IOException, ParserConfigurationException, SAXException {
-        GeneratorConfiguration configuration = parseBusinessGeneratorConfiguration(Object.class.getResource("/generator/generatorBusinessConfig.xml"));
+        GeneratorConfiguration configuration = parseBusinessGeneratorConfiguration(Object.class.getResource("/generator/business/generatorBusinessConfig.xml"));
         log.info("configuration {}", configuration);
         List<Module> modules = configuration.getModules();
         String basePackage = configuration.getBasePackage();
         basePackage = StringUtils.trimToEmpty(basePackage);
         basePackage = basePackage.replace(".", File.separator);
         for (Module module : modules) {
-            File moduleDir = createModuleDir(module, basePackage);
-            StringBuilder sb = new StringBuilder();
-            sb.append(configuration.getBasePackage());
-            sb.append(".");
-            sb.append(module.getMvcGenerator().getTargetPackage());
-            module.setBasePackage(sb.toString());
-            writeGeneratedVOFile(moduleDir, configuration, module);
+            if (module.isCreate()) {
+                File moduleDir = createModuleDir(module, basePackage);
+                StringBuilder sb = new StringBuilder();
+                sb.append(configuration.getBasePackage());
+                sb.append(".");
+                sb.append(module.getMvcGenerator().getTargetPackage());
+                module.setBasePackage(sb.toString());
+                writeGeneratedVOFile(moduleDir, configuration, module);
+            }
         }
     }
 

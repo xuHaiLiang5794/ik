@@ -17,6 +17,7 @@ import java.util.List;
 @Data
 public class Module {
     private String targetProject;
+    private boolean create = true;
     private JavaMvcGenerator mvcGenerator;
     private List<JavaMvc> javaMvc;
 

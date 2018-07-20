@@ -29,23 +29,7 @@ public class GeneratedVOFile extends GeneratedFile {
     }
 
     @Override
-    public String getFormattedContent() {
-        StringBuilder sb = new StringBuilder();
-        Class clazz;
-        try {
-            clazz = Class.forName(getDomainPackage() + OutputUtils.packageSeparator() + getDomainObjectName());
-        } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("要生成的domain对象不存在");
-        }
-        appendPackage(sb);
-        OutputUtils.newLine(sb);
-
-        int startIndex = sb.length();
-        String flagStr = "importStrings";
-        sb.append(flagStr);
-        int endIndex = sb.length();
-        OutputUtils.newLine(sb);
-
+    protected void appendContent(Class clazz, StringBuilder sb, List<String> importStrings) {
         sb.append("@Data");
         OutputUtils.newLine(sb);
 
@@ -56,21 +40,12 @@ public class GeneratedVOFile extends GeneratedFile {
         OutputUtils.newLine(sb);
 
         Field[] fields = clazz.getDeclaredFields();
-        List<String> importStrings = getImportStrings(fields.length);
         importStrings.add("import lombok.Data;");
 
         appendFields(fields, sb, importStrings);
 
         OutputUtils.newLine(sb);
         sb.append("}");
-
-        StringBuilder importStringsSb = new StringBuilder();
-        for (String importString : importStrings) {
-            importStringsSb.append(importString);
-            OutputUtils.newLine(importStringsSb);
-        }
-        sb.replace(startIndex, endIndex, importStringsSb.toString());
-        return sb.toString();
     }
 
     private void appendFields(Field[] fields, StringBuilder sb, List<String> importStrings) {
@@ -125,18 +100,6 @@ public class GeneratedVOFile extends GeneratedFile {
                 .replace("required=false, ", "")
                 .replace(", example=\"\"", "");
         return annotationStr;
-    }
-
-    private void appendPackage(StringBuilder sb) {
-        sb.append("package ");
-        sb.append(getCurrentPackage());
-        sb.append(";");
-        OutputUtils.newLine(sb);
-    }
-
-    @Override
-    public String getFileName() {
-        return getDomainObjectName() + VO_NAME_SUFFIX;
     }
 
     @Override
